@@ -1,15 +1,15 @@
-import json
+import yaml
 import pg8000
 
 # Cargar configuración desde el archivo JSON
-def load_config(file_path="config.json"):
+def load_config(file_path="config.yaml"):
     try:
         with open(file_path, "r") as file:
-            return json.load(file)
+            return yaml.safe_load(file)
     except FileNotFoundError:
         print("Error: El archivo de configuración no se encontró.")
         return None
-    except json.JSONDecodeError:
+    except yaml.YAMLError:
         print("Error: El archivo de configuración tiene un formato inválido.")
         return None
 
