@@ -1,9 +1,0 @@
-database:
-    dbname: "registro"
-    user: "neondb_owner"
-    password: "V7RUaINp5wlE"
-    host: "ep-summer-band-a5v5e7nn.us-east-2.aws.neon.tech"
-    port: 5432
-
-bot:
-    token: "8038530686:AAHouv6fyKfJGpAcwUgBcNFSd1CKPP4MRBo"
