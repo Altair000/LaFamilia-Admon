@@ -4,6 +4,8 @@ from config.db_config import conexion
 from funciones.inventario import obtener_productos, crear_botones_inline, obtener_historial, generar_pdf, obtener_history
 # Módulos de terceros
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from flask import Flask
+from threading import Thread
 
 # Comando /start para iniciar el bot
 @bot.message_handler(commands=['start'])
@@ -273,6 +275,17 @@ def confirmar_cambio_precio(message, producto, precio):
         bot.send_message(message.chat.id, f"Precio del producto '{producto}' actualizado a ${nuevo_precio}.")
         cursor.close()
 
-if __name__ == '__main__':
-    print("Bot Iniciado")
-    bot.infinity_polling()
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "El bot de Telegram está funcionando"
+
+# Ejecuta el bot en un hilo separado
+def run_bot():
+    bot.polling()
+
+# Inicia el servidor Flask
+if __name__ == "__main__":
+    Thread(target=run_bot).start()
+    app.run(host="0.0.0.0", port=5000)
