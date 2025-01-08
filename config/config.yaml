@@ -1,0 +1,10 @@
+bot:
+  token: '8038530686:AAFZbGRSv4AlUw7bVUWbTneokRY2wO6I0hk'
+database:
+  user: 'neondb_owner'
+  password: 'V7RUaINp5wlE'
+  host: 'ep-summer-band-a5v5e7nn.us-east-2.aws.neon.tech'
+  port: 5432
+  db: 'registro'
+admin:
+  id: 1519654469
