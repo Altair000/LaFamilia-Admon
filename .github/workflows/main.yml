@@ -1,0 +1,13 @@
+name: Keep Alive
+
+on:
+  schedule:
+    - cron: 0 * * * *
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Keep Alive
+        run: |
+          curl -s -o /dev/null https://bookish-happiness-5g47jpx5pg7qfprg5.github.dev
