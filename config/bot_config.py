@@ -12,8 +12,8 @@ config_path = os.path.join(os.path.dirname(__file__), 'config.yaml')
 try:
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
-    bot_token = config['bot']['token']
-    bot = telebot.TeleBot(bot_token)
+    TOKEN = config['bot']['token']
+    bot = telebot.TeleBot(TOKEN)
 except FileNotFoundError:
     logging.error(f"Archivo config.yaml no encontrado!!")
 
