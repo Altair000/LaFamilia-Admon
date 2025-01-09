@@ -1,5 +1,5 @@
 # Módulos locales
-from config.bot_config import bot, get_admin_ids
+from config.bot_config import bot, TOKEN, get_admin_ids
 from config.db_config import conexion
 from funciones.inventario import obtener_productos, crear_botones_inline, obtener_historial, generar_pdf, obtener_history
 # Módulos de terceros
@@ -277,15 +277,18 @@ def confirmar_cambio_precio(message, producto, precio):
 
 app = Flask(__name__)
 
+app.route(f"/{TOKEN}", methods=["POST"])
+def receive_update():
+    json_update = request.get_json()
+    bot.process_new_updates([telebot.types.Update.de_json(json_update)])
+    return "OK", 200
+
 @app.route("/")
 def home():
-    return "El bot de Telegram está funcionando"
+    return "Bot está funcionando", 200
 
-# Ejecuta el bot en un hilo separado
-def run_bot():
-    bot.polling()
-
-# Inicia el servidor Flask
 if __name__ == "__main__":
-    Thread(target=run_bot).start()
+    # Establece el webhook
+    bot.remove_webhook()
+    bot.set_webhook(url="https://lafamilia-admon.onrender.com/" + TOKEN)  # Reemplaza con tu URL de Render
     app.run(host="0.0.0.0", port=5000)
