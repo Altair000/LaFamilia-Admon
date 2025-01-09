@@ -277,14 +277,15 @@ def confirmar_cambio_precio(message, producto, precio):
 
 app = Flask(__name__)
 
-def receive_update():
-    bot.infinity_polling()
-
 @app.route("/")
 def home():
-    return "Bot está funcionando", 200
+    return "El bot de Telegram está funcionando"
 
+# Ejecuta el bot en un hilo separado
+def run_bot():
+    bot.polling()
+
+# Inicia el servidor Flask
 if __name__ == "__main__":
-    # Establece el webhook
-    bot.remove_webhook()
+    Thread(target=run_bot).start()
     app.run(host="0.0.0.0", port=5000)
