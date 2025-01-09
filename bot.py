@@ -277,11 +277,8 @@ def confirmar_cambio_precio(message, producto, precio):
 
 app = Flask(__name__)
 
-app.route(f"/{TOKEN}", methods=["POST"])
 def receive_update():
-    json_update = request.get_json()
-    bot.process_new_updates([telebot.types.Update.de_json(json_update)])
-    return "OK", 200
+    bot.infinity_polling()
 
 @app.route("/")
 def home():
@@ -290,5 +287,4 @@ def home():
 if __name__ == "__main__":
     # Establece el webhook
     bot.remove_webhook()
-    bot.set_webhook(url="https://lafamilia-admon.onrender.com/" + TOKEN)  # Reemplaza con tu URL de Render
     app.run(host="0.0.0.0", port=5000)
